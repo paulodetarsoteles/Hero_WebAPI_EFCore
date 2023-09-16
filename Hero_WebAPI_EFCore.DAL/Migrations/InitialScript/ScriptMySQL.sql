@@ -24,25 +24,18 @@
 --CREATE TABLE `Secrets` (
 --    `SecretId` int NOT NULL AUTO_INCREMENT,
 --    `Name` longtext NULL,
---    PRIMARY KEY (`SecretId`)
+--    `HeroId` int NOT NULL,
+--    PRIMARY KEY (`SecretId`),
+--    CONSTRAINT `FK_Secrets_Heroes_HeroId` FOREIGN KEY (`HeroId`) REFERENCES `Heroes` (`HeroId`) ON DELETE CASCADE
 --);
 
 --CREATE TABLE `Weapons` (
 --    `WeaponId` int NOT NULL AUTO_INCREMENT,
 --    `Name` longtext NULL,
---    PRIMARY KEY (`WeaponId`)
+--    `HeroId` int NOT NULL,
+--    PRIMARY KEY (`WeaponId`),
+--    CONSTRAINT `FK_Weapons_Heroes_HeroId` FOREIGN KEY (`HeroId`) REFERENCES `Heroes` (`HeroId`) ON DELETE CASCADE
 --);
-
---INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
---VALUES ('20230916220423_Create_Databse_And_Tables', '7.0.11');
-
---COMMIT;
-
---START TRANSACTION;
-
---ALTER TABLE `Weapons` ADD `HeroId` int NOT NULL DEFAULT 0;
-
---ALTER TABLE `Secrets` ADD `HeroId` int NOT NULL DEFAULT 0;
 
 --CREATE TABLE `HeroesMovies` (
 --    `HeroId` int NOT NULL,
@@ -52,18 +45,14 @@
 --    CONSTRAINT `FK_HeroesMovies_Movies_MovieId` FOREIGN KEY (`MovieId`) REFERENCES `Movies` (`MovieId`) ON DELETE CASCADE
 --);
 
---CREATE INDEX `IX_Weapons_HeroId` ON `Weapons` (`HeroId`);
+--CREATE INDEX `IX_HeroesMovies_MovieId` ON `HeroesMovies` (`MovieId`);
 
 --CREATE UNIQUE INDEX `IX_Secrets_HeroId` ON `Secrets` (`HeroId`);
 
---CREATE INDEX `IX_HeroesMovies_MovieId` ON `HeroesMovies` (`MovieId`);
-
---ALTER TABLE `Secrets` ADD CONSTRAINT `FK_Secrets_Heroes_HeroId` FOREIGN KEY (`HeroId`) REFERENCES `Heroes` (`HeroId`) ON DELETE CASCADE;
-
---ALTER TABLE `Weapons` ADD CONSTRAINT `FK_Weapons_Heroes_HeroId` FOREIGN KEY (`HeroId`) REFERENCES `Heroes` (`HeroId`) ON DELETE CASCADE;
+--CREATE INDEX `IX_Weapons_HeroId` ON `Weapons` (`HeroId`);
 
 --INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
---VALUES ('20230916224233_Update_Models_and_Relations', '7.0.11');
+--VALUES ('20230916232706_Create_Databse_And_Tables', '7.0.11');
 
 --COMMIT;
 

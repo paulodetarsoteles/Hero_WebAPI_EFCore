@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Hero_WebAPI_EFCore.Domain\Hero_WebAPI_EFCore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
