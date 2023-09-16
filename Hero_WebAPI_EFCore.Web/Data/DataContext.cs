@@ -12,7 +12,7 @@ namespace Hero_WebAPI_EFCore.Web.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("Server=localhost;DataBase=Hero_WebAPI_EFCore_DB;Uid=dev;Pwd=1234567");
+            optionsBuilder.UseMySQL("Server=localhost;DataBase=Hero_WebAPI_EFCore_DB;Uid=developer;Pwd=1234567");
         }
     }
 }
