@@ -1,4 +1,4 @@
-﻿namespace Hero_WebAPI_EFCore.Web.Models
+﻿namespace Hero_WebAPI_EFCore.Domain.Models
 {
     public class Hero
     {

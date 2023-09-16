@@ -1,7 +1,7 @@
-﻿using Hero_WebAPI_EFCore.Web.Models;
+﻿using Hero_WebAPI_EFCore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hero_WebAPI_EFCore.Web.Data
+namespace Hero_WebAPI_EFCore.DAL.Data
 {
     public class DataContext : DbContext
     {

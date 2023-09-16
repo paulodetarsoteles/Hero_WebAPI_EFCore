@@ -1,8 +1,8 @@
-﻿namespace Hero_WebAPI_EFCore.Web.Models
+﻿namespace Hero_WebAPI_EFCore.Domain.Models
 {
-    public class Weapon
+    public class Secret
     {
-        public int WeaponId { get; set; }
+        public int SecretId { get; set; }
         public string Name { get; set; }
         public int HeroId { get; set; }
 
