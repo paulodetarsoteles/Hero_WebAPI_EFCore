@@ -1,11 +1,11 @@
 ﻿namespace Hero_WebAPI_EFCore.Web.Models
 {
-    public class Secret
+    public class HeroMovie
     {
-        public int SecretId { get; set; }
-        public string Name { get; set; }
         public int HeroId { get; set; }
+        public int MovieId { get; set; }
 
         public Hero Hero { get; set; }
+        public Movie Movie { get; set; }
     }
 }
