@@ -9,7 +9,10 @@ internal class Program
 
         // Add services to the container.
 
-        builder.Services.AddDbContext<DataContext>(options => { options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")); });
+        builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
         builder.Services.AddControllers();
 
