@@ -67,10 +67,36 @@ namespace Hero_WebAPI_EFCore.Web.Services
             }
         }
 
+        public HeroViewModel GetByName(string name)
+        {
+            try
+            {
+                Hero entity = _heroRepository.GetByName(name);
+
+                if (entity is null)
+                    return null;
+
+                return new HeroViewModel
+                {
+                    HeroId = entity.HeroId,
+                    Name = entity.Name,
+                    Active = entity.Active,
+                    UpdateDate = entity.UpdateDate
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public bool Insert(HeroViewModel model)
         {
             try
             {
+                if (_heroRepository.GetByName(model.Name) is not null)
+                    throw new Exception("Nome já consta na base de dados.");
+
                 Hero entity = new()
                 {
                     Name = model.Name,

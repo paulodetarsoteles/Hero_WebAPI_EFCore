@@ -41,6 +41,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
+        public Hero GetByName(string name)
+        {
+            try
+            {
+                Hero hero = _dataContext.Heroes.First(h => h.Name == name);
+
+                return hero;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
         public bool Insert(Hero entity)
         {
             try

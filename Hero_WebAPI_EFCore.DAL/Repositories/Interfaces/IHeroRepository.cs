@@ -6,6 +6,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories.Interfaces
     {
         List<Hero> Get();
         Hero GetById(int id);
+        Hero GetByName(string name);
         bool Insert(Hero entity);
         bool Update(Hero entity);
         bool Delete(Hero entity);

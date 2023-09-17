@@ -1,6 +1,7 @@
 ﻿using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Hero_WebAPI_EFCore.Web.Controllers
 {
@@ -54,6 +55,27 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                     return BadRequest("Erro: Código ID enviado é inválido.");
 
                 HeroViewModel model = _heroService.GetById(id);
+
+                if (model is null)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, model);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetHeroByName/{heroName}")]
+        public IActionResult GetHeroByName(string heroName)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(heroName))
+                    return BadRequest("Erro: Nome enviado para a consulta é inválido.");
+                
+                HeroViewModel model = _heroService.GetByName(heroName);
 
                 if (model is null)
                     return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
