@@ -1,7 +1,6 @@
 ﻿using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Hero_WebAPI_EFCore.Web.Controllers
 {
@@ -74,7 +73,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             {
                 if (string.IsNullOrEmpty(heroName))
                     return BadRequest("Erro: Nome enviado para a consulta é inválido.");
-                
+
                 HeroViewModel model = _heroService.GetByName(heroName);
 
                 if (model is null)
