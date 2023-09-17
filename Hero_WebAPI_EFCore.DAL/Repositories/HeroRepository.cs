@@ -26,11 +26,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public Hero GetById(int id)
+        public Hero? GetById(int id)
         {
             try
             {
-                Hero hero = _dataContext.Heroes.First(h => h.HeroId == id);
+                Hero hero;
+
+                try
+                {
+                    hero = _dataContext.Heroes.First(h => h.HeroId == id);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
 
                 return hero;
             }
@@ -41,11 +51,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public Hero GetByName(string name)
+        public Hero? GetByName(string name)
         {
             try
             {
-                Hero hero = _dataContext.Heroes.First(h => h.Name == name);
+                Hero hero;
+
+                try
+                {
+                    hero = _dataContext.Heroes.First(h => h.Name == name);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
 
                 return hero;
             }
