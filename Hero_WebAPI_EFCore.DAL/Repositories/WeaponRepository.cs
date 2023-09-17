@@ -15,22 +15,84 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public List<Weapon> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _dataContext.Weapons.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
-        public Weapon GetById(int id)
+        public Weapon? GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Weapon weapon;
+
+                try
+                {
+                    weapon = _dataContext.Weapons.First(h => h.WeaponId == id);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+
+                return weapon;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
-        public Weapon? GetByName(string id)
+        public Weapon? GetByName(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Weapon weapon;
+
+                try
+                {
+                    weapon = _dataContext.Weapons.First(h => h.Name == name);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+
+                return weapon;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Insert(Weapon entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dataContext.Weapons.Add(entity);
+                int entitiesSaved = _dataContext.SaveChanges();
+
+                if (entitiesSaved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Update(Weapon entity)
