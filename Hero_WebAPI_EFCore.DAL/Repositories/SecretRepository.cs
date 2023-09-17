@@ -15,22 +15,84 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public List<Secret> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _dataContext.Secrets.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
-        public Secret GetById(int id)
+        public Secret? GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Secret secret;
+
+                try
+                {
+                    secret = _dataContext.Secrets.First(h => h.SecretId == id);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+
+                return secret;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
-        public Secret? GetByName(string id)
+        public Secret? GetByName(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Secret secret;
+
+                try
+                {
+                    secret = _dataContext.Secrets.First(h => h.Name == name);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+
+                return secret;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Insert(Secret entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dataContext.Secrets.Add(entity);
+                int entitiesSaved = _dataContext.SaveChanges();
+
+                if (entitiesSaved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Update(Secret entity)
