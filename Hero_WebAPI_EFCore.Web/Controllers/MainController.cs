@@ -89,6 +89,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
 
         [HttpPost]
         [Route("CreateHero")]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateHero([FromBody] HeroViewModel model)
         {
             try
