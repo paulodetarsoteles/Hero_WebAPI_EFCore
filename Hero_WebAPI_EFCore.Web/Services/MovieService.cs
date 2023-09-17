@@ -5,9 +5,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class MovieService : IMovieService
     {
-        public bool Delete(MovieViewModel model)
+        private readonly IMovieService _movieService;
+
+        public MovieService(IMovieService movieService)
         {
-            throw new NotImplementedException();
+            _movieService = movieService;
         }
 
         public List<MovieViewModel> Get()
@@ -26,6 +28,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
         }
 
         public bool Update(MovieViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(MovieViewModel model)
         {
             throw new NotImplementedException();
         }

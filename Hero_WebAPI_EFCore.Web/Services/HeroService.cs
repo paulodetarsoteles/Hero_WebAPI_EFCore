@@ -5,9 +5,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class HeroService : IHeroService
     {
-        public bool Delete(HeroViewModel model)
+        private readonly IHeroService _heroService;
+
+        public HeroService(IHeroService heroService)
         {
-            throw new NotImplementedException();
+            _heroService = heroService;
         }
 
         public List<HeroViewModel> Get()
@@ -26,6 +28,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
         }
 
         public bool Update(HeroViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(HeroViewModel model)
         {
             throw new NotImplementedException();
         }

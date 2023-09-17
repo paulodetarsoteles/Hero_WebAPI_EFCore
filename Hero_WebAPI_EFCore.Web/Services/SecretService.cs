@@ -5,9 +5,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class SecretService : ISecretService
     {
-        public bool Delete(SecretViewModel model)
+        private readonly ISecretService _secretService;
+
+        public SecretService(ISecretService secretService)
         {
-            throw new NotImplementedException();
+            _secretService = secretService;
         }
 
         public List<SecretViewModel> Get()
@@ -26,6 +28,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
         }
 
         public bool Update(SecretViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(SecretViewModel model)
         {
             throw new NotImplementedException();
         }
