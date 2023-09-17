@@ -1,13 +1,16 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using Hero_WebAPI_EFCore.DAL.Data;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
     public class SecretRepository : ISecretRepository
     {
-        public bool Delete(Secret entity)
+        private readonly DataContext _dataContext;
+
+        public SecretRepository(DataContext dataContext)
         {
-            throw new NotImplementedException();
+            _dataContext = dataContext;
         }
 
         public List<Secret> Get()
@@ -26,6 +29,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         }
 
         public bool Update(Secret entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Secret entity)
         {
             throw new NotImplementedException();
         }

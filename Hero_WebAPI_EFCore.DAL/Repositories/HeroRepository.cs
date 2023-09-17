@@ -1,13 +1,16 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using Hero_WebAPI_EFCore.DAL.Data;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
     public class HeroRepository : IHeroRepository
     {
-        public bool Delete(Hero entity)
+        private readonly DataContext _dataContext;
+
+        public HeroRepository(DataContext dataContext)
         {
-            throw new NotImplementedException();
+            _dataContext = dataContext;
         }
 
         public List<Hero> Get()
@@ -26,6 +29,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         }
 
         public bool Update(Hero entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Hero entity)
         {
             throw new NotImplementedException();
         }

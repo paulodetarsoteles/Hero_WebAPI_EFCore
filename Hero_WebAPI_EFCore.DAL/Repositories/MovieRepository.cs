@@ -1,13 +1,16 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using Hero_WebAPI_EFCore.DAL.Data;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
-        public bool Delete(Movie entity)
+        private readonly DataContext _dataContext;
+
+        public MovieRepository(DataContext dataContext)
         {
-            throw new NotImplementedException();
+            _dataContext = dataContext;
         }
 
         public List<Movie> Get()
@@ -26,6 +29,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         }
 
         public bool Update(Movie entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Movie entity)
         {
             throw new NotImplementedException();
         }
