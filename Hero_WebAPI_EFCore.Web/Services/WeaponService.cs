@@ -1,4 +1,5 @@
 ﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 
@@ -15,22 +16,96 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public List<WeaponViewModel> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Weapon> entities = _weaponRepository.Get();
+
+                if (entities is null || entities.Count == 0)
+                    return null;
+
+                List<WeaponViewModel> models = new();
+
+                foreach (Weapon weapon in entities)
+                {
+                    models.Add(new WeaponViewModel
+                    {
+                        WeaponId = weapon.WeaponId,
+                        Name = weapon.Name,
+                        HeroId = weapon.HeroId
+                    });
+                }
+
+                return models;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public WeaponViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Weapon entity = _weaponRepository.GetById(id);
+
+                if (entity is null)
+                    return null;
+
+                return new WeaponViewModel
+                {
+                    WeaponId = entity.WeaponId,
+                    Name = entity.Name,
+                    HeroId = entity.HeroId
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public WeaponViewModel GetByName(string name)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Weapon entity = _weaponRepository.GetByName(name);
+
+                if (entity is null)
+                    return null;
+
+                return new WeaponViewModel
+                {
+                    WeaponId = entity.WeaponId,
+                    Name = entity.Name,
+                    HeroId = entity.HeroId
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Insert(WeaponViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_weaponRepository.GetByName(model.Name) is not null)
+                    throw new Exception("Nome já consta na base de dados.");
+
+                Weapon entity = new()
+                {
+                    Name = model.Name,
+                    HeroId = model.HeroId
+                };
+
+                return _weaponRepository.Insert(entity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Update(WeaponViewModel model)
