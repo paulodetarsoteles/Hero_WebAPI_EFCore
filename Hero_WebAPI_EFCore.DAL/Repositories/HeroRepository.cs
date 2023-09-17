@@ -25,7 +25,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public bool Insert(Hero entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dataContext.Heroes.Add(entity);
+                int entitiesSaved = _dataContext.SaveChanges();
+
+                if (entitiesSaved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Update(Hero entity)

@@ -1,7 +1,6 @@
 ﻿using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 
 namespace Hero_WebAPI_EFCore.Web.Controllers
 {
@@ -29,26 +28,26 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         #region Heroes
 
         [HttpPost]
-        public IActionResult CreateHero(HeroViewModel model)
+        [Route("CreateHero")]
+        public IActionResult CreateHero([FromBody] HeroViewModel model)
         {
             try
             {
-                if (model is null)
-                    return BadRequest("Modelo enviado está nulo.");
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
 
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                model.UpdateDate = DateTime.Now;
 
                 bool result = _heroService.Insert(model);
 
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return CreatedAtAction(MethodBase.GetCurrentMethod().ToString(), $"Id: {model.HeroId}", model);
+                return this.StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
