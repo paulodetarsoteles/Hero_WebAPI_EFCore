@@ -49,7 +49,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
             {
                 Movie entity = _movieRepository.GetById(id);
 
-                if (entity is null) 
+                if (entity is null)
                     return null;
 
                 return new MovieViewModel
