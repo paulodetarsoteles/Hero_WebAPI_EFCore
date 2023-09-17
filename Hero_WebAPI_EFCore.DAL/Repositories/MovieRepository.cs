@@ -23,6 +23,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public Movie? GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Movie entity)
         {
             throw new NotImplementedException();

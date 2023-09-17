@@ -23,6 +23,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public Weapon? GetByName(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Weapon entity)
         {
             throw new NotImplementedException();

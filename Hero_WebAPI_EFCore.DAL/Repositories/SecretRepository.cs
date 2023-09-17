@@ -23,6 +23,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public Secret? GetByName(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(Secret entity)
         {
             throw new NotImplementedException();
