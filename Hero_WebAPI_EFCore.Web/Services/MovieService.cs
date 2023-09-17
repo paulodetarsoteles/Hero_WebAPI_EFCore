@@ -1,5 +1,4 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories;
-using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
@@ -64,6 +63,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public MovieViewModel GetByName(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public bool Insert(MovieViewModel model)

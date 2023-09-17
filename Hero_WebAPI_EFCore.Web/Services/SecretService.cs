@@ -23,6 +23,11 @@ namespace Hero_WebAPI_EFCore.Web.Services
             throw new NotImplementedException();
         }
 
+        public SecretViewModel GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Insert(SecretViewModel model)
         {
             throw new NotImplementedException();

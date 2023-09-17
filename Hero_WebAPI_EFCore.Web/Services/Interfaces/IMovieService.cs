@@ -6,6 +6,7 @@ namespace Hero_WebAPI_EFCore.Web.Services.Interfaces
     {
         List<MovieViewModel> Get();
         MovieViewModel GetById(int id);
+        MovieViewModel GetByName(string name);
         bool Insert(MovieViewModel model);
         bool Update(MovieViewModel model);
         bool Delete(MovieViewModel model);

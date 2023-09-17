@@ -6,6 +6,7 @@ namespace Hero_WebAPI_EFCore.Web.Services.Interfaces
     {
         List<WeaponViewModel> Get();
         WeaponViewModel GetById(int id);
+        WeaponViewModel GetByName(string name);
         bool Insert(WeaponViewModel model);
         bool Update(WeaponViewModel model);
         bool Delete(WeaponViewModel model);
