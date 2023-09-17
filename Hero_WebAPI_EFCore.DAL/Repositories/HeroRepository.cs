@@ -15,12 +15,30 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public List<Hero> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _dataContext.Heroes.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public Hero GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Hero hero = _dataContext.Heroes.First(h => h.HeroId == id);
+
+                return hero;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Insert(Hero entity)

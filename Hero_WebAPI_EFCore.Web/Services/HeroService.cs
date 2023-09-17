@@ -16,12 +16,55 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public List<HeroViewModel> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Hero> entities = _heroRepository.Get();
+
+                if (entities is null || entities.Count == 0)
+                    return null;
+
+                List<HeroViewModel> models = new();
+
+                foreach (Hero hero in entities)
+                {
+                    models.Add(new HeroViewModel
+                    {
+                        HeroId = hero.HeroId,
+                        Name = hero.Name,
+                        Active = hero.Active,
+                        UpdateDate = hero.UpdateDate
+                    });
+                }
+
+                return models;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public HeroViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Hero entity = _heroRepository.GetById(id);
+
+                if (entity is null)
+                    return null;
+
+                return new HeroViewModel
+                {
+                    HeroId = entity.HeroId,
+                    Name = entity.Name,
+                    Active = entity.Active,
+                    UpdateDate = entity.UpdateDate
+                };
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Insert(HeroViewModel model)

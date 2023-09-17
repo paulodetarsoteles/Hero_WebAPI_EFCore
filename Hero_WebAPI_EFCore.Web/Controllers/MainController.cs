@@ -27,6 +27,45 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
 
         #region Heroes
 
+        [HttpGet("GetHeroes")]
+        public IActionResult GetHeroes()
+        {
+            try
+            {
+                List<HeroViewModel> models = _heroService.Get();
+
+                if (models is null || models.Count == 0)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo cadastrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, models);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetHeroById/{id}")]
+        public IActionResult GetHeroById(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                HeroViewModel model = _heroService.GetById(id);
+
+                if (model is null)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, model);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         [HttpPost]
         [Route("CreateHero")]
         public IActionResult CreateHero([FromBody] HeroViewModel model)
