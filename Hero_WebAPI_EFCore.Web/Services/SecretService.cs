@@ -1,15 +1,16 @@
-﻿using Hero_WebAPI_EFCore.Web.Models;
+﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 
 namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class SecretService : ISecretService
     {
-        private readonly ISecretService _secretService;
+        private readonly ISecretRepository _secretRepository;
 
         public SecretService(ISecretService secretService)
         {
-            _secretService = secretService;
+            _secretRepository = secretRepository;
         }
 
         public List<SecretViewModel> Get()

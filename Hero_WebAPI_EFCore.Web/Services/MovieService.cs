@@ -1,15 +1,16 @@
-﻿using Hero_WebAPI_EFCore.Web.Models;
+﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 
 namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly IMovieService _movieService;
+        private readonly IMovieRepository _movieRepository;
 
-        public MovieService(IMovieService movieService)
+        public MovieService(IMovieRepository movieRepository)
         {
-            _movieService = movieService;
+            _movieRepository = movieRepository;
         }
 
         public List<MovieViewModel> Get()

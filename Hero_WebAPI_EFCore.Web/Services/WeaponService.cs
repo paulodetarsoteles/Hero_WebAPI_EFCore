@@ -1,15 +1,16 @@
-﻿using Hero_WebAPI_EFCore.Web.Models;
+﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 
 namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class WeaponService : IWeaponService
     {
-        private readonly IWeaponService _weaponService;
+        private readonly IWeaponRepository _weaponRepository;
 
-        public WeaponService(IWeaponService weaponService)
+        public WeaponService(IWeaponRepository weaponRepository)
         {
-            _weaponService = weaponService;
+            _weaponRepository = weaponRepository;
         }
 
         public List<WeaponViewModel> Get()

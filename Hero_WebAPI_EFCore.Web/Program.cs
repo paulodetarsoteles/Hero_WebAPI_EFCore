@@ -1,8 +1,8 @@
 using Hero_WebAPI_EFCore.DAL.Data;
-using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.DAL.Repositories;
-using Hero_WebAPI_EFCore.Web.Services.Interfaces;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Web.Services;
+using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 internal class Program

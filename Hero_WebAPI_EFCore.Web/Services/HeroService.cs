@@ -1,15 +1,16 @@
-﻿using Hero_WebAPI_EFCore.Web.Models;
+﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 
 namespace Hero_WebAPI_EFCore.Web.Services
 {
     public class HeroService : IHeroService
     {
-        private readonly IHeroService _heroService;
+        private readonly IHeroRepository _heroRepository;
 
-        public HeroService(IHeroService heroService)
+        public HeroService(IHeroRepository heroRepository)
         {
-            _heroService = heroService;
+            _heroRepository = heroRepository;
         }
 
         public List<HeroViewModel> Get()

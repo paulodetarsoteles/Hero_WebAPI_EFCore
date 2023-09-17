@@ -1,5 +1,4 @@
 ﻿using Hero_WebAPI_EFCore.Domain.Models;
-using System.Dynamic;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories.Interfaces
 {

@@ -42,7 +42,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 bool result = _heroService.Insert(model);
 
                 if (!result)
-                    throw new Exception("Erro ao salvar modelo."); 
+                    throw new Exception("Erro ao salvar modelo.");
 
                 return CreatedAtAction(MethodBase.GetCurrentMethod().ToString(), $"Id: {model.HeroId}", model);
             }
