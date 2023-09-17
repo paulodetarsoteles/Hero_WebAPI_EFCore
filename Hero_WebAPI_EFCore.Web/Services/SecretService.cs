@@ -8,7 +8,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
     {
         private readonly ISecretRepository _secretRepository;
 
-        public SecretService(ISecretService secretService)
+        public SecretService(ISecretRepository secretRepository)
         {
             _secretRepository = secretRepository;
         }
