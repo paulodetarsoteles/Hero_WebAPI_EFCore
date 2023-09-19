@@ -117,6 +117,89 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         #endregion
 
         #region Secrets
+
+        [HttpGet("GetSecrets")]
+        public IActionResult GetSecrets()
+        {
+            try
+            {
+                List<SecretViewModel> models = _secretService.Get();
+
+                if (models is null || models.Count == 0)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo cadastrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, models);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetSecretById/{id}")]
+        public IActionResult GetSecretById(int id)
+        {
+            try
+            {
+                if (id == 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                SecretViewModel model = _secretService.GetById(id);
+
+                if (model is null)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, model);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetSecretByName/{heroName}")]
+        public IActionResult GetSecretByName(string secretName)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(secretName))
+                    return BadRequest("Erro: Nome enviado para a consulta é inválido.");
+
+                HeroViewModel model = _heroService.GetByName(secretName);
+
+                if (model is null)
+                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+
+                return this.StatusCode(StatusCodes.Status200OK, model);
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpPost]
+        [Route("CreateSecret")]
+        public IActionResult CreateSecret([FromBody] SecretViewModel model)
+        {
+            try
+            {
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
+
+                bool result = _secretService.Insert(model);
+
+                if (!result)
+                    throw new Exception("Erro ao salvar modelo.");
+
+                return this.StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Weapons
