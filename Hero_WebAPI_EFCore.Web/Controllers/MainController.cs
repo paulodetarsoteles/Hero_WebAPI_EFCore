@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hero_WebAPI_EFCore.Web.Controllers
 {
     [Route("api/[controller]")]
-    public class MainController : Controller
+    public class MainController : ControllerBase
     {
         private readonly IHeroService _heroService;
         private readonly IMovieService _movieService;
