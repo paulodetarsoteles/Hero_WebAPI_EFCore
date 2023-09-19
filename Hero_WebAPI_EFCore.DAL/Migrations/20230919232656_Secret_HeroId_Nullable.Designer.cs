@@ -3,6 +3,7 @@ using System;
 using Hero_WebAPI_EFCore.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hero_WebAPI_EFCore.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230919232656_Secret_HeroId_Nullable")]
+    partial class Secret_HeroId_Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +84,6 @@ namespace Hero_WebAPI_EFCore.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("SecretId");
@@ -98,7 +100,7 @@ namespace Hero_WebAPI_EFCore.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("HeroId")
+                    b.Property<int>("HeroId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -143,7 +145,9 @@ namespace Hero_WebAPI_EFCore.DAL.Migrations
                 {
                     b.HasOne("Hero_WebAPI_EFCore.Domain.Models.Hero", "Hero")
                         .WithMany("Weapons")
-                        .HasForeignKey("HeroId");
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Hero");
                 });

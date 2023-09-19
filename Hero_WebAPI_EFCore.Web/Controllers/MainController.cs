@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hero_WebAPI_EFCore.Web.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class MainController : ControllerBase
     {
@@ -180,14 +181,14 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
 
         [HttpPost]
         [Route("CreateSecret")]
-        public IActionResult CreateSecret([FromBody] SecretViewModel model)
+        public IActionResult CreateSecret(SecretViewModel secretViewModel)
         {
             try
             {
-                if (model is null || !ModelState.IsValid)
+                if (secretViewModel is null || !ModelState.IsValid)
                     return BadRequest("Erro: Modelo enviado está inválido.");
 
-                bool result = _secretService.Insert(model);
+                bool result = _secretService.Insert(secretViewModel);
 
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
