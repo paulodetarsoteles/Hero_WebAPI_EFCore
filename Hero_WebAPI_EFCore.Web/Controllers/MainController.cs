@@ -158,7 +158,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpGet("GetSecretByName/{heroName}")]
+        [HttpGet("GetSecretByName/{secretName}")]
         public IActionResult GetSecretByName(string secretName)
         {
             try
@@ -166,7 +166,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (string.IsNullOrEmpty(secretName))
                     return BadRequest("Erro: Nome enviado para a consulta é inválido.");
 
-                HeroViewModel model = _heroService.GetByName(secretName);
+                SecretViewModel model = _secretService.GetByName(secretName);
 
                 if (model is null)
                     return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
