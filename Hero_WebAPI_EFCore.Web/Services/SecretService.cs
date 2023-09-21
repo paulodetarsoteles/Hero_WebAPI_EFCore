@@ -52,11 +52,28 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
+                if (entity.Hero is null)
+                    return new SecretViewModel
+                    {
+                        SecretId = entity.SecretId,
+                        Name = entity.Name,
+                        HeroId = entity.HeroId
+                    };
+
+                HeroViewModel heroModel = new()
+                {
+                    HeroId = entity.Hero.HeroId,
+                    Name = entity.Hero.Name,
+                    Active = entity.Hero.Active,
+                    UpdateDate = entity.Hero.UpdateDate
+                };
+
                 return new SecretViewModel
                 {
                     SecretId = entity.SecretId,
                     Name = entity.Name,
-                    HeroId = entity.HeroId
+                    HeroId = entity.HeroId,
+                    Hero = heroModel
                 };
             }
             catch (Exception e)
@@ -74,11 +91,28 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
+                if (entity.Hero is null)
+                    return new SecretViewModel
+                    {
+                        SecretId = entity.SecretId,
+                        Name = entity.Name,
+                        HeroId = entity.HeroId
+                    };
+
+                HeroViewModel heroModel = new()
+                {
+                    HeroId = entity.Hero.HeroId,
+                    Name = entity.Hero.Name,
+                    Active = entity.Hero.Active,
+                    UpdateDate = entity.Hero.UpdateDate
+                };
+
                 return new SecretViewModel
                 {
                     SecretId = entity.SecretId,
                     Name = entity.Name,
-                    HeroId = entity.HeroId
+                    HeroId = entity.HeroId,
+                    Hero = heroModel
                 };
             }
             catch (Exception e)

@@ -1,6 +1,7 @@
 ﻿using Hero_WebAPI_EFCore.DAL.Data;
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
@@ -17,7 +18,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                return _dataContext.Secrets.ToList();
+                return _dataContext.Secrets.AsNoTracking().ToList();
             }
             catch (Exception e)
             {
@@ -34,7 +35,9 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    secret = _dataContext.Secrets.First(h => h.SecretId == id);
+                    secret = _dataContext.Secrets.AsNoTracking()
+                        .Include(h => h.Hero)
+                        .First(h => h.SecretId == id);
                 }
                 catch (InvalidOperationException e)
                 {
@@ -59,7 +62,9 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    secret = _dataContext.Secrets.First(h => h.Name == name);
+                    secret = _dataContext.Secrets.AsNoTracking()
+                        .Include(h => h.Hero)
+                        .First(h => h.Name == name);
                 }
                 catch (InvalidOperationException e)
                 {
