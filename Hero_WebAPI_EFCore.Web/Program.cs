@@ -23,6 +23,8 @@ internal class Program
         builder.Services.AddScoped<ISecretService, SecretService>();
         builder.Services.AddScoped<IWeaponService, WeaponService>();
 
+        builder.Services.AddAutoMapper(typeof(Program));
+
         builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
