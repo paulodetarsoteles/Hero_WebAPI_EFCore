@@ -56,13 +56,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new HeroViewModel
-                {
-                    HeroId = entity.HeroId,
-                    Name = entity.Name,
-                    Active = entity.Active,
-                    UpdateDate = entity.UpdateDate
-                };
+                return _mapper.Map<HeroViewModel>(entity);
             }
             catch (Exception e)
             {
@@ -79,13 +73,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new HeroViewModel
-                {
-                    HeroId = entity.HeroId,
-                    Name = entity.Name,
-                    Active = entity.Active,
-                    UpdateDate = entity.UpdateDate
-                };
+                return _mapper.Map<HeroViewModel>(entity);
             }
             catch (Exception e)
             {
