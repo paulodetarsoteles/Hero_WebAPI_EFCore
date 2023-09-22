@@ -3,6 +3,7 @@ using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
+using MySqlX.XDevAPI.Common;
 
 namespace Hero_WebAPI_EFCore.Web.Services
 {
@@ -26,20 +27,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entities is null || entities.Count == 0)
                     return null;
 
-                List<HeroViewModel> models = new();
-
-                foreach (Hero hero in entities)
-                {
-                    models.Add(new HeroViewModel
-                    {
-                        HeroId = hero.HeroId,
-                        Name = hero.Name,
-                        Active = hero.Active,
-                        UpdateDate = hero.UpdateDate
-                    });
-                }
-
-                return models;
+                return _mapper.Map<List<HeroViewModel>>(entities);
             }
             catch (Exception e)
             {
@@ -88,12 +76,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_heroRepository.GetByName(model.Name) is not null)
                     throw new Exception("Nome já consta na base de dados.");
 
-                Hero entity = new()
-                {
-                    Name = model.Name,
-                    Active = model.Active,
-                    UpdateDate = model.UpdateDate
-                };
+                Hero entity = _mapper.Map<Hero>(model);
 
                 return _heroRepository.Insert(entity);
             }
