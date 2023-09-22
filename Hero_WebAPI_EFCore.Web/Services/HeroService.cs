@@ -1,4 +1,5 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using AutoMapper;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
@@ -8,10 +9,12 @@ namespace Hero_WebAPI_EFCore.Web.Services
     public class HeroService : IHeroService
     {
         private readonly IHeroRepository _heroRepository;
+        private readonly IMapper _mapper;
 
-        public HeroService(IHeroRepository heroRepository)
+        public HeroService(IHeroRepository heroRepository, IMapper mapper)
         {
             _heroRepository = heroRepository;
+            _mapper = mapper;
         }
 
         public List<HeroViewModel> Get()

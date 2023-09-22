@@ -1,4 +1,5 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using AutoMapper;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
@@ -8,10 +9,12 @@ namespace Hero_WebAPI_EFCore.Web.Services
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
+        private readonly IMapper _mapper;
 
-        public MovieService(IMovieRepository movieRepository)
+        public MovieService(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _mapper = mapper;
         }
 
         public List<MovieViewModel> Get()

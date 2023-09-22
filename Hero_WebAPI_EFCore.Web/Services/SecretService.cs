@@ -1,4 +1,5 @@
-﻿using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
+﻿using AutoMapper;
+using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
@@ -8,10 +9,12 @@ namespace Hero_WebAPI_EFCore.Web.Services
     public class SecretService : ISecretService
     {
         private readonly ISecretRepository _secretRepository;
+        private readonly IMapper _mapper;
 
-        public SecretService(ISecretRepository secretRepository)
+        public SecretService(ISecretRepository secretRepository, IMapper mapper)
         {
             _secretRepository = secretRepository;
+            _mapper = mapper;
         }
 
         public List<SecretViewModel> Get()
