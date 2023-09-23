@@ -111,6 +111,29 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
+        [HttpPut("UpdateHero")]
+        public IActionResult UpdateHero([FromBody] HeroViewModel model)
+        {
+            try
+            {
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
+
+                model.UpdateDate = DateTime.Now;
+
+                bool result = _heroService.Update(model);
+
+                if (!result)
+                    throw new Exception("Erro ao salvar modelo.");
+
+                return Ok("Message: Modelo cadastrado.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Movies

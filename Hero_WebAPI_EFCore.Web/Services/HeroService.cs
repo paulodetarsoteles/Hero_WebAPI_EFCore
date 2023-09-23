@@ -87,7 +87,19 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public bool Update(HeroViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_heroRepository.GetById(model.HeroId) is null)
+                    throw new Exception("Modelo não encontrado.");
+
+                Hero entity = _mapper.Map<Hero>(model);
+
+                return _heroRepository.Update(entity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Delete(HeroViewModel model)
