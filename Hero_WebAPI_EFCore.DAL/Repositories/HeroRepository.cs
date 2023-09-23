@@ -40,14 +40,14 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                         .Include(h => h.Weapons)
                         .Include(h => h.HeroesMovies)
                         .First(h => h.HeroId == id);
+                    
+                    return hero;
                 }
                 catch (InvalidOperationException e)
                 {
                     Console.WriteLine(e.Message);
                     return null;
                 }
-
-                return hero;
             }
             catch (Exception e)
             {
@@ -69,14 +69,14 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                         .Include(h => h.Weapons)
                         .Include(h => h.HeroesMovies)
                         .First(h => h.Name == name);
+                    
+                    return hero;
                 }
                 catch (InvalidOperationException e)
                 {
                     Console.WriteLine(e.Message);
                     return null;
                 }
-
-                return hero;
             }
             catch (Exception e)
             {

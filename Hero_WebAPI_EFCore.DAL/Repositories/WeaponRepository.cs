@@ -1,6 +1,7 @@
 ﻿using Hero_WebAPI_EFCore.DAL.Data;
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
@@ -17,7 +18,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                return _dataContext.Weapons.ToList();
+                return _dataContext.Weapons.AsNoTracking().ToList();
             }
             catch (Exception e)
             {
@@ -34,15 +35,17 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    weapon = _dataContext.Weapons.First(h => h.WeaponId == id);
+                    weapon = _dataContext.Weapons.AsNoTracking()
+                        .Include(h => h.Hero)
+                        .First(h => h.WeaponId == id);
+                
+                    return weapon;
                 }
                 catch (InvalidOperationException e)
                 {
                     Console.WriteLine(e.Message);
                     return null;
                 }
-
-                return weapon;
             }
             catch (Exception e)
             {
@@ -59,15 +62,17 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    weapon = _dataContext.Weapons.First(h => h.Name == name);
+                    weapon = _dataContext.Weapons.AsNoTracking()
+                        .Include (h => h.Hero)
+                        .First(h => h.Name == name);
+                
+                    return weapon;
                 }
                 catch (InvalidOperationException e)
                 {
                     Console.WriteLine(e.Message);
                     return null;
                 }
-
-                return weapon;
             }
             catch (Exception e)
             {
