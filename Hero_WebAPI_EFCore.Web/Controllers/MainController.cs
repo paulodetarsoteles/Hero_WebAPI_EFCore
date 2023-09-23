@@ -120,7 +120,12 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         {
             try
             {
-                return Ok();
+                List<MovieViewModel> models = _movieService.Get();
+
+                if (models is null || models.Count == 0)
+                    return Ok("Message: Nenhum modelo cadastrado.");
+
+                return Ok(models);
             }
             catch (Exception e)
             {
@@ -133,7 +138,15 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         {
             try
             {
-                return Ok();
+                if (id == 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                MovieViewModel model = _movieService.GetById(id);
+
+                if (model is null)
+                    return Ok("Message: Nenhum modelo encontrado.");
+
+                return Ok(model);
             }
             catch (Exception e)
             {
@@ -146,7 +159,15 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         {
             try
             {
-                return Ok();
+                if (string.IsNullOrEmpty(movieName))
+                    return BadRequest("Erro: Nome enviado para a consulta é inválido.");
+
+                MovieViewModel model = _movieService.GetByName(movieName);
+
+                if (model is null)
+                    return Ok("Message: Nenhum modelo encontrado.");
+
+                return Ok(model);
             }
             catch (Exception e)
             {
@@ -159,7 +180,15 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         {
             try
             {
-                return Ok();
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
+
+                bool result = _movieService.Insert(model);
+
+                if (!result)
+                    throw new Exception("Erro ao salvar modelo.");
+
+                return Ok("Message: Modelo cadastrado.");
             }
             catch (Exception e)
             {
