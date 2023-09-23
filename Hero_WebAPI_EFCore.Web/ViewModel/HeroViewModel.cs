@@ -1,4 +1,6 @@
-﻿namespace Hero_WebAPI_EFCore.Web.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Hero_WebAPI_EFCore.Web.Models
 {
     public class HeroViewModel
     {

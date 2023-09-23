@@ -4,6 +4,8 @@ using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Web.Services;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 
 internal class Program
 {
@@ -30,7 +32,12 @@ internal class Program
                 options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            });
 
         var app = builder.Build();
 
