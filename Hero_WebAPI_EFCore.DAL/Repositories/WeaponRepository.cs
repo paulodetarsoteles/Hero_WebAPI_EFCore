@@ -38,7 +38,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                     weapon = _dataContext.Weapons.AsNoTracking()
                         .Include(h => h.Hero)
                         .First(h => h.WeaponId == id);
-                
+
                     return weapon;
                 }
                 catch (InvalidOperationException e)
@@ -63,9 +63,9 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                 try
                 {
                     weapon = _dataContext.Weapons.AsNoTracking()
-                        .Include (h => h.Hero)
+                        .Include(h => h.Hero)
                         .First(h => h.Name == name);
-                
+
                     return weapon;
                 }
                 catch (InvalidOperationException e)

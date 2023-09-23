@@ -38,7 +38,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                     secret = _dataContext.Secrets.AsNoTracking()
                         .Include(h => h.Hero)
                         .First(h => h.SecretId == id);
-                    
+
                     return secret;
                 }
                 catch (InvalidOperationException e)
