@@ -26,19 +26,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entities is null || entities.Count == 0)
                     return null;
 
-                List<MovieViewModel> models = new();
-
-                foreach (Movie movie in entities)
-                {
-                    models.Add(new MovieViewModel
-                    {
-                        MovieId = movie.MovieId,
-                        Name = movie.Name,
-                        Rate = movie.Rate
-                    });
-                }
-
-                return models;
+                return _mapper.Map<List<MovieViewModel>>(entities);
             }
             catch (Exception e)
             {
@@ -55,12 +43,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new MovieViewModel
-                {
-                    MovieId = entity.MovieId,
-                    Name = entity.Name,
-                    Rate = entity.Rate
-                };
+                return _mapper.Map<MovieViewModel>(entity);
             }
             catch (Exception e)
             {
@@ -77,12 +60,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new MovieViewModel
-                {
-                    MovieId = entity.MovieId,
-                    Name = entity.Name,
-                    Rate = entity.Rate
-                };
+                return _mapper.Map<MovieViewModel>(entity);
             }
             catch (Exception e)
             {
@@ -97,11 +75,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_movieRepository.GetByName(model.Name) is not null)
                     throw new Exception("Nome já consta na base de dados.");
 
-                Movie entity = new()
-                {
-                    Name = model.Name,
-                    Rate = model.Rate
-                };
+                Movie entity = _mapper.Map<Movie>(model);
 
                 return _movieRepository.Insert(entity);
             }

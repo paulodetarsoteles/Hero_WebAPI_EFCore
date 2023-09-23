@@ -28,17 +28,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
                 List<WeaponViewModel> models = new();
 
-                foreach (Weapon weapon in entities)
-                {
-                    models.Add(new WeaponViewModel
-                    {
-                        WeaponId = weapon.WeaponId,
-                        Name = weapon.Name,
-                        HeroId = weapon.HeroId
-                    });
-                }
-
-                return models;
+                return _mapper.Map<List<WeaponViewModel>>(entities);
             }
             catch (Exception e)
             {
@@ -55,12 +45,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new WeaponViewModel
-                {
-                    WeaponId = entity.WeaponId,
-                    Name = entity.Name,
-                    HeroId = entity.HeroId
-                };
+                return _mapper.Map<WeaponViewModel>(entity);
             }
             catch (Exception e)
             {
@@ -77,12 +62,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entity is null)
                     return null;
 
-                return new WeaponViewModel
-                {
-                    WeaponId = entity.WeaponId,
-                    Name = entity.Name,
-                    HeroId = entity.HeroId
-                };
+                return _mapper.Map<WeaponViewModel>(entity);
             }
             catch (Exception e)
             {
@@ -97,13 +77,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_weaponRepository.GetByName(model.Name) is not null)
                     throw new Exception("Nome já consta na base de dados.");
 
-                Weapon entity = new()
-                {
-                    Name = model.Name,
-                    HeroId = model.HeroId
-                };
-
-                return _weaponRepository.Insert(entity);
+                return _weaponRepository.Insert(_mapper.Map<Weapon>(model));
             }
             catch (Exception e)
             {
