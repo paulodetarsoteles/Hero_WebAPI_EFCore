@@ -36,13 +36,13 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 List<HeroViewModel> models = _heroService.Get();
 
                 if (models is null || models.Count == 0)
-                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo cadastrado.");
+                    return Ok("Message: Nenhum modelo cadastrado.");
 
-                return this.StatusCode(StatusCodes.Status200OK, models);
+                return Ok(models);
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -57,13 +57,13 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 HeroViewModel model = _heroService.GetById(id);
 
                 if (model is null)
-                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+                    return Ok("Message: Nenhum modelo encontrado.");
 
-                return this.StatusCode(StatusCodes.Status200OK, model);
+                return Ok(model);
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -78,13 +78,13 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 HeroViewModel model = _heroService.GetByName(heroName);
 
                 if (model is null)
-                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+                    return Ok("Message: Nenhum modelo encontrado.");
 
-                return this.StatusCode(StatusCodes.Status200OK, model);
+                return Ok(model);
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -103,11 +103,11 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return this.StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
+                return Ok("Message: Modelo cadastrado.");
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -124,7 +124,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -137,7 +137,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -150,7 +150,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -163,7 +163,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -195,7 +195,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             try
             {
                 if (id == 0)
-                    return BadRequest("Erro: Código ID enviado é inválido.");
+                    return this.StatusCode(StatusCodes.Status400BadRequest, "Erro: Código ID enviado é inválido.");
 
                 SecretViewModel model = _secretService.GetById(id);
 
@@ -216,18 +216,18 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             try
             {
                 if (string.IsNullOrEmpty(secretName))
-                    return BadRequest("Erro: Nome enviado para a consulta é inválido.");
+                    return StatusCode(StatusCodes.Status400BadRequest, "Erro: Nome enviado para a consulta é inválido.");
 
                 SecretViewModel model = _secretService.GetByName(secretName);
 
                 if (model is null)
-                    return this.StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
+                    return StatusCode(StatusCodes.Status200OK, $"Message: Nenhum modelo encontrado.");
 
-                return this.StatusCode(StatusCodes.Status200OK, model);
+                return StatusCode(StatusCodes.Status200OK, model);
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -237,18 +237,18 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             try
             {
                 if (secretViewModel is null || !ModelState.IsValid)
-                    return BadRequest("Erro: Modelo enviado está inválido.");
+                    return StatusCode(400, "Erro: Modelo enviado está inválido.");
 
                 bool result = _secretService.Insert(secretViewModel);
 
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return this.StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
+                return StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -265,7 +265,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -278,7 +278,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -291,7 +291,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -304,7 +304,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
             catch (Exception e)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
