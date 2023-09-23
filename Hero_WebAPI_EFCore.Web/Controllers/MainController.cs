@@ -88,8 +88,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("CreateHero")]
+        [HttpPost("CreateHero")]
         public IActionResult CreateHero([FromBody] HeroViewModel model)
         {
             try
@@ -115,6 +114,59 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         #endregion
 
         #region Movies
+
+        [HttpGet("GetMovies")]
+        public IActionResult GetMovies()
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetMovieById/{id}")]
+        public IActionResult GetMovieById(int id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetMovieByName/{movieName}")]
+        public IActionResult GetMovieByName(string movieName)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpPost("CreateMovie")]
+        public IActionResult CreateMovie([FromBody] MovieViewModel model)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Secrets
@@ -179,8 +231,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("CreateSecret")]
+        [HttpPost("CreateSecret")]
         public IActionResult CreateSecret(SecretViewModel secretViewModel)
         {
             try
@@ -204,6 +255,59 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         #endregion
 
         #region Weapons
+
+        [HttpGet("GetWeapons")]
+        public IActionResult GetWeapons()
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetWeaponById/{id}")]
+        public IActionResult GetWeaponById(int id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpGet("GetWeaponByName/{weaponName}")]
+        public IActionResult GetWeaponByName(string weaponName)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpPost("CreateWeapon")]
+        public IActionResult CreateWeapon([FromBody] WeaponViewModel model)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
     }
 }
