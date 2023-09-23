@@ -4,7 +4,6 @@ using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Web.Services;
 using Hero_WebAPI_EFCore.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
 
 internal class Program

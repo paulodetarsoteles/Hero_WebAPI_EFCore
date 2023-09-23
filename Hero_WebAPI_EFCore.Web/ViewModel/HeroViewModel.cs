@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Hero_WebAPI_EFCore.Web.Models
+﻿namespace Hero_WebAPI_EFCore.Web.Models
 {
     public class HeroViewModel
     {
