@@ -261,6 +261,27 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
+        [HttpDelete("DeleteMovie")]
+        public IActionResult DeleteMovie(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                bool result = _movieService.Delete(id);
+
+                if (!result)
+                    throw new Exception("Erro ao excluir modelo.");
+
+                return Ok("Message: Modelo excluído.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Secrets
@@ -367,6 +388,19 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
+        [HttpDelete("DeleteSecret")]
+        public IActionResult DeleteSecret(int id)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Weapons
@@ -470,6 +504,19 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpDelete("DeleteWeapon")]
+        public IActionResult DeleteWeapon(int id)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

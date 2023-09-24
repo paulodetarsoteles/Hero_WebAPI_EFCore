@@ -92,7 +92,9 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_movieRepository.GetById(model.MovieId) is null)
                     throw new Exception("Modelo não encontrado.");
 
-                if (_movieRepository.GetByName(model.Name) is not null)
+                Movie movie = _movieRepository.GetByName(model.Name);
+
+                if (movie is not null && movie.MovieId != model.MovieId)
                     throw new Exception("Nome já consta na base de dados.");
 
                 Movie entity = _mapper.Map<Movie>(model);
