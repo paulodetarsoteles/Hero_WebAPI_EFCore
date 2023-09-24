@@ -126,7 +126,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo cadastrado.");
+                return Ok("Message: Modelo atualizado.");
             }
             catch (Exception e)
             {
@@ -220,7 +220,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
         }
 
         [HttpPut("UpdateMovie")]
-        public IActionResult UpdateMovie([FromBody]MovieViewModel model)
+        public IActionResult UpdateMovie([FromBody] MovieViewModel model)
         {
             try
             {
@@ -232,7 +232,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo cadastrado.");
+                return Ok("Message: Modelo atualizado.");
             }
             catch (Exception e)
             {
@@ -325,6 +325,27 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
+        [HttpPut("UpdateSecret")]
+        public IActionResult UpdateSecret([FromBody] SecretViewModel model)
+        {
+            try
+            {
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
+
+                bool result = _secretService.Update(model);
+
+                if (!result)
+                    throw new Exception("Erro ao salvar modelo.");
+
+                return Ok("Message: Modelo atualizado.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Weapons
@@ -403,6 +424,27 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo cadastrado.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
+        [HttpPut("UpdateWeapon")]
+        public IActionResult UpdateWeapon([FromBody] WeaponViewModel model)
+        {
+            try
+            {
+                if (model is null || !ModelState.IsValid)
+                    return BadRequest("Erro: Modelo enviado está inválido.");
+
+                bool result = _weaponService.Update(model);
+
+                if (!result)
+                    throw new Exception("Erro ao salvar modelo.");
+
+                return Ok("Message: Modelo atualizado.");
             }
             catch (Exception e)
             {

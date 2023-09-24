@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Hero_WebAPI_EFCore.DAL.Repositories;
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Hero_WebAPI_EFCore.Web.Models;
@@ -93,6 +92,9 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_movieRepository.GetById(model.MovieId) is null)
                     throw new Exception("Modelo não encontrado.");
 
+                if (_movieRepository.GetByName(model.Name) is not null)
+                    throw new Exception("Nome já consta na base de dados.");
+
                 Movie entity = _mapper.Map<Movie>(model);
 
                 return _movieRepository.Update(entity);
@@ -101,7 +103,6 @@ namespace Hero_WebAPI_EFCore.Web.Services
             {
                 throw new Exception(e.Message);
             }
-
         }
 
         public bool Delete(MovieViewModel model)

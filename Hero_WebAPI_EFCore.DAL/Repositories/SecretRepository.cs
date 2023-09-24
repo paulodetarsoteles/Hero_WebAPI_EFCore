@@ -81,6 +81,32 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
+        public bool HasHero(int id)
+        {
+            try
+            {
+                return _dataContext.Heroes.AsNoTracking().Any(h => h.HeroId == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
+        public bool HasHeroRelation(int id)
+        {
+            try
+            {
+                return _dataContext.Secrets.AsNoTracking().Any(h => h.HeroId == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
         public bool Insert(Secret entity)
         {
             try
@@ -102,7 +128,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public bool Update(Secret entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dataContext.Secrets.Update(entity);
+                int entitiesSaved = _dataContext.SaveChanges();
+
+                if (entitiesSaved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Delete(Secret entity)

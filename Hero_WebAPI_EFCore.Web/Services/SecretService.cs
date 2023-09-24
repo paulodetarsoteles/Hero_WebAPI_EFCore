@@ -147,7 +147,33 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public bool Update(SecretViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_secretRepository.GetById(model.SecretId) is null)
+                    throw new Exception("Modelo não encontrado.");
+
+                Secret secret = _secretRepository.GetByName(model.Name);
+
+                if (secret is not null && secret.SecretId != model.SecretId)
+                    throw new Exception("Nome já consta na base de dados.");
+
+                if (model.HeroId is not null)
+                {
+                    if (!_secretRepository.HasHero((int)model.HeroId))
+                        throw new Exception("Não há herói com este Id na base de dados.");
+
+                    if (_secretRepository.HasHeroRelation((int)model.HeroId))
+                        throw new Exception("Já existe um herói vinculado a essa identidade.");
+                }
+
+                Secret entity = _mapper.Map<Secret>(model);
+
+                return _secretRepository.Update(entity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Delete(SecretViewModel model)

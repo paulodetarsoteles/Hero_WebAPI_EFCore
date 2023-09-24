@@ -87,7 +87,28 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public bool Update(WeaponViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_weaponRepository.GetById(model.WeaponId) is null)
+                    throw new Exception("Modelo não encontrado.");
+
+                Weapon weapon = _weaponRepository.GetByName(model.Name);
+
+                if (weapon is not null && weapon.WeaponId != model.WeaponId)
+                    throw new Exception("Nome já consta na base de dados.");
+
+                if (model.HeroId is not null)
+                {
+                    if (!_weaponRepository.HasHero((int)model.HeroId))
+                        throw new Exception("Não há herói com este Id na base de dados.");
+                }
+
+                return _weaponRepository.Update(_mapper.Map<Weapon>(model));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public bool Delete(WeaponViewModel model)

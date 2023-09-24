@@ -92,6 +92,9 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (_heroRepository.GetById(model.HeroId) is null)
                     throw new Exception("Modelo não encontrado.");
 
+                if (_heroRepository.GetByName(model.Name) is not null)
+                    throw new Exception("Nome já consta na base de dados.");
+
                 Hero entity = _mapper.Map<Hero>(model);
 
                 return _heroRepository.Update(entity);
