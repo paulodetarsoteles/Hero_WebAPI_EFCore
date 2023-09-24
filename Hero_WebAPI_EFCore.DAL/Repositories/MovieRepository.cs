@@ -121,7 +121,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public bool Delete(Movie entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

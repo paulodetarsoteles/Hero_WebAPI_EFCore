@@ -10,6 +10,6 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories.Interfaces
         bool HasHero(int id);
         bool Insert(Weapon entity);
         bool Update(Weapon entity);
-        bool Delete(Weapon entity);
+        bool Delete(int id);
     }
 }

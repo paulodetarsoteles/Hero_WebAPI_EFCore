@@ -105,7 +105,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
             }
         }
 
-        public bool Delete(MovieViewModel model)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

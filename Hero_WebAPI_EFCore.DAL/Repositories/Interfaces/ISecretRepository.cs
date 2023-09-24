@@ -11,6 +11,6 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories.Interfaces
         bool HasHeroRelation(int id);
         bool Insert(Secret entity);
         bool Update(Secret entity);
-        bool Delete(Secret entity);
+        bool Delete(int id);
     }
 }

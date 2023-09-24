@@ -105,9 +105,28 @@ namespace Hero_WebAPI_EFCore.Web.Services
             }
         }
 
-        public bool Delete(HeroViewModel model)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_heroRepository.GetById(id) is null)
+                    throw new Exception("Modelo não encontrado.");
+
+                if (_heroRepository.HasSecretRelation(id))
+                    throw new Exception("Herói tem relação com identidade secreta.");
+
+                if (_heroRepository.HasWeaponRelation(id))
+                    throw new Exception("Herói tem relação com armas.");
+
+                if (_heroRepository.HasMovieRelation(id))
+                    throw new Exception("Herói tem relação com filmes.");
+
+                return _heroRepository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

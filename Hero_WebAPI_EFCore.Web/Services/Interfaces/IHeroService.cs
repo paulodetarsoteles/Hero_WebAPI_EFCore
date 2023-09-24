@@ -9,6 +9,6 @@ namespace Hero_WebAPI_EFCore.Web.Services.Interfaces
         HeroViewModel GetByName(string name);
         bool Insert(HeroViewModel model);
         bool Update(HeroViewModel model);
-        bool Delete(HeroViewModel model);
+        bool Delete(int id);
     }
 }

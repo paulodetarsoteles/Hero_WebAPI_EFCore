@@ -176,7 +176,7 @@ namespace Hero_WebAPI_EFCore.Web.Services
             }
         }
 
-        public bool Delete(SecretViewModel model)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

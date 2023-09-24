@@ -145,7 +145,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public bool Delete(Secret entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

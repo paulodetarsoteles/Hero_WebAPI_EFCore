@@ -9,6 +9,6 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories.Interfaces
         Movie? GetByName(string name);
         bool Insert(Movie entity);
         bool Update(Movie entity);
-        bool Delete(Movie entity);
+        bool Delete(int id);
     }
 }

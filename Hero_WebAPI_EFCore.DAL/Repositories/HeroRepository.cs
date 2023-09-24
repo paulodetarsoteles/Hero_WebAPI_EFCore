@@ -2,6 +2,7 @@
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
@@ -85,6 +86,45 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
+        public bool HasSecretRelation(int id)
+        {
+            try
+            {
+                return _dataContext.Secrets.AsNoTracking().Any(h => h.HeroId == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
+        public bool HasWeaponRelation(int id)
+        {
+            try
+            {
+                return _dataContext.Weapons.AsNoTracking().Any(h => h.HeroId == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
+        public bool HasMovieRelation(int id)
+        {
+            try
+            {
+                return _dataContext.HeroesMovies.AsNoTracking().Any(h => h.HeroId == id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
+        }
+
         public bool Insert(Hero entity)
         {
             try
@@ -123,9 +163,25 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public bool Delete(Hero entity)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Hero entity = _dataContext.Heroes.AsNoTracking().First(h => h.HeroId == id);
+                EntityEntry<Hero> entityEntry = _dataContext.Heroes.Remove(entity);
+
+                _dataContext.SaveChanges();
+
+                if (entityEntry is null)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
     }
 }

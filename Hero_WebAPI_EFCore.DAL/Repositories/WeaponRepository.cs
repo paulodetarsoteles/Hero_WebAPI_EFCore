@@ -132,7 +132,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
             }
         }
 
-        public bool Delete(Weapon entity)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();
         }

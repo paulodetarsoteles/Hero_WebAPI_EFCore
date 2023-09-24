@@ -134,6 +134,27 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
+        [HttpDelete("DeleteHero/{id}")]
+        public IActionResult DeleteHero(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                bool result = _heroService.Delete(id);
+
+                if (!result)
+                    throw new Exception("Erro ao excluir modelo.");
+
+                return Ok("Message: Modelo excluído.");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
+            }
+        }
+
         #endregion
 
         #region Movies

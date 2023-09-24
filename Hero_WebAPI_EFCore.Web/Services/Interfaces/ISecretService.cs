@@ -9,6 +9,6 @@ namespace Hero_WebAPI_EFCore.Web.Services.Interfaces
         SecretViewModel GetByName(string name);
         bool Insert(SecretViewModel model);
         bool Update(SecretViewModel model);
-        bool Delete(SecretViewModel model);
+        bool Delete(int id);
     }
 }
