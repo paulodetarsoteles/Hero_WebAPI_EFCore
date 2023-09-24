@@ -107,7 +107,17 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_movieRepository.HasHeroRelation(id))
+                    throw new Exception("Filme tem relação com heróis.");
+
+                return _movieRepository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
