@@ -1,6 +1,7 @@
 ﻿using Hero_WebAPI_EFCore.DAL.Data;
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
@@ -34,7 +35,10 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    movie = _dataContext.Movies.First(h => h.MovieId == id);
+                    movie = _dataContext.Movies.AsNoTracking()
+                        .Include(h => h.HeroesMovies)
+                        .ThenInclude(h => h.Hero)
+                        .First(h => h.MovieId == id);
                 }
                 catch (InvalidOperationException e)
                 {
@@ -59,7 +63,10 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
                 try
                 {
-                    movie = _dataContext.Movies.First(h => h.Name == name);
+                    movie = _dataContext.Movies.AsNoTracking()
+                        .Include(h => h.HeroesMovies)
+                        .ThenInclude(h => h.Hero)
+                        .First(h => h.Name == name);
                 }
                 catch (InvalidOperationException e)
                 {
@@ -97,7 +104,21 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public bool Update(Movie entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dataContext.Movies.Update(entity);
+                int entitiesSaved = _dataContext.SaveChanges();
+
+                if (entitiesSaved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
 
         public bool Delete(Movie entity)
