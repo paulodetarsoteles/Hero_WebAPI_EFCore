@@ -10,6 +10,8 @@ namespace Hero_WebAPI_EFCore.Web.Mapping
         {
             CreateMap<Movie, MovieViewModel>();
             CreateMap<MovieViewModel, Movie>();
+            CreateMap<HeroMovie, HeroMovieViewModel>();
+            CreateMap<HeroMovieViewModel, HeroMovie>();
             CreateMap<Hero, HeroViewModel>();
             CreateMap<HeroViewModel, Hero>();//.ForMember(x => x.Weapons, opt => opt.Ignore());
             CreateMap<Weapon, WeaponViewModel>();

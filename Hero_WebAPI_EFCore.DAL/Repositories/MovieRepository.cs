@@ -19,7 +19,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                return _dataContext.Movies.ToList();
+                return _dataContext.Movies.AsNoTracking().ToList();
             }
             catch (Exception e)
             {

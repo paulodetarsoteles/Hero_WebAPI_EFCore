@@ -40,6 +40,7 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                         .Include(h => h.Secret)
                         .Include(h => h.Weapons)
                         .Include(h => h.HeroesMovies)
+                        .ThenInclude(h => h.Movie)
                         .First(h => h.HeroId == id);
 
                     return hero;
