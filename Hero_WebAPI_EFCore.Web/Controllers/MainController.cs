@@ -98,9 +98,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
 
                 model.UpdateDate = DateTime.Now;
 
-                bool result = _heroService.Insert(model);
-
-                if (!result)
+                if (!_heroService.Insert(model))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo cadastrado.");
@@ -121,9 +119,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
 
                 model.UpdateDate = DateTime.Now;
 
-                bool result = _heroService.Update(model);
-
-                if (!result)
+                if (!_heroService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo atualizado.");
@@ -142,9 +138,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (id <= 0)
                     return BadRequest("Erro: Código ID enviado é inválido.");
 
-                bool result = _heroService.Delete(id);
-
-                if (!result)
+                if (!_heroService.Delete(id))
                     throw new Exception("Erro ao excluir modelo.");
 
                 return Ok("Message: Modelo excluído.");
@@ -227,9 +221,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (model is null || !ModelState.IsValid)
                     return BadRequest("Erro: Modelo enviado está inválido.");
 
-                bool result = _movieService.Insert(model);
-
-                if (!result)
+                if (!_movieService.Insert(model))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo cadastrado.");
@@ -248,9 +240,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (model is null || !ModelState.IsValid)
                     return BadRequest("Erro: Modelo enviado está inválido.");
 
-                bool result = _movieService.Update(model);
-
-                if (!result)
+                if (!_movieService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo atualizado.");
@@ -261,7 +251,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpDelete("DeleteMovie")]
+        [HttpDelete("DeleteMovie/{id}")]
         public IActionResult DeleteMovie(int id)
         {
             try
@@ -269,9 +259,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (id <= 0)
                     return BadRequest("Erro: Código ID enviado é inválido.");
 
-                bool result = _movieService.Delete(id);
-
-                if (!result)
+                if (!_movieService.Delete(id))
                     throw new Exception("Erro ao excluir modelo.");
 
                 return Ok("Message: Modelo excluído.");
@@ -354,9 +342,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (secretViewModel is null || !ModelState.IsValid)
                     return StatusCode(400, "Erro: Modelo enviado está inválido.");
 
-                bool result = _secretService.Insert(secretViewModel);
-
-                if (!result)
+                if (!_secretService.Insert(secretViewModel))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
@@ -375,9 +361,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (model is null || !ModelState.IsValid)
                     return BadRequest("Erro: Modelo enviado está inválido.");
 
-                bool result = _secretService.Update(model);
-
-                if (!result)
+                if (!_secretService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
                 return Ok("Message: Modelo atualizado.");
@@ -388,16 +372,22 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpDelete("DeleteSecret")]
+        [HttpDelete("DeleteSecret/{id}")]
         public IActionResult DeleteSecret(int id)
         {
             try
             {
-                throw new NotImplementedException();
+                if (id <= 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                if (!_secretService.Delete(id))
+                    throw new Exception("Erro ao excluir identidade secreta.");
+
+                return Ok("Message: Modelo excluído.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 
@@ -507,16 +497,22 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
             }
         }
 
-        [HttpDelete("DeleteWeapon")]
+        [HttpDelete("DeleteWeapon/{id}")]
         public IActionResult DeleteWeapon(int id)
         {
             try
             {
-                throw new NotImplementedException();
+                if (id <= 0)
+                    return BadRequest("Erro: Código ID enviado é inválido.");
+
+                if (!_weaponService.Delete(id))
+                    throw new Exception("Erro ao excluir arma.");
+
+                return Ok("Message: Modelo excluído.");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro: {e.Message}");
             }
         }
 

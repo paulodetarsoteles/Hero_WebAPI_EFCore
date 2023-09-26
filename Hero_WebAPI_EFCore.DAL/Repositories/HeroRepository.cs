@@ -129,7 +129,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                _dataContext.Heroes.Add(entity);
+                EntityEntry<Hero> entityEntry = _dataContext.Heroes.Add(entity);
+
+                if (entityEntry is null)
+                    return false;
+
                 int entitiesSaved = _dataContext.SaveChanges();
 
                 if (entitiesSaved <= 0)
@@ -148,7 +152,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                _dataContext.Heroes.Update(entity);
+                EntityEntry<Hero> entityEntry = _dataContext.Heroes.Update(entity);
+
+                if (entityEntry is null)
+                    return false;
+
                 int entitiesSaved = _dataContext.SaveChanges();
 
                 if (entitiesSaved <= 0)
@@ -170,9 +178,12 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
                 Hero entity = _dataContext.Heroes.AsNoTracking().First(h => h.HeroId == id);
                 EntityEntry<Hero> entityEntry = _dataContext.Heroes.Remove(entity);
 
-                _dataContext.SaveChanges();
-
                 if (entityEntry is null)
+                    return false;
+
+                int entityRemoved = _dataContext.SaveChanges();
+
+                if (entityRemoved <= 0)
                     return false;
 
                 return true;

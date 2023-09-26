@@ -2,6 +2,7 @@
 using Hero_WebAPI_EFCore.DAL.Repositories.Interfaces;
 using Hero_WebAPI_EFCore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Hero_WebAPI_EFCore.DAL.Repositories
 {
@@ -98,7 +99,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                _dataContext.Weapons.Add(entity);
+                EntityEntry<Weapon> entityEntry = _dataContext.Weapons.Add(entity);
+
+                if (entityEntry is null)
+                    return false;
+
                 int entitiesSaved = _dataContext.SaveChanges();
 
                 if (entitiesSaved <= 0)
@@ -117,7 +122,11 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
         {
             try
             {
-                _dataContext.Weapons.Update(entity);
+                EntityEntry<Weapon> entityEntry = _dataContext.Weapons.Update(entity);
+
+                if (entityEntry is null)
+                    return false;
+
                 int entitiesSaved = _dataContext.SaveChanges();
 
                 if (entitiesSaved <= 0)
@@ -134,7 +143,26 @@ namespace Hero_WebAPI_EFCore.DAL.Repositories
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Weapon entity = _dataContext.Weapons.AsNoTracking().First(h => h.WeaponId == id);
+                EntityEntry<Weapon> entityEntry = _dataContext.Weapons.Remove(entity);
+
+                if (entityEntry is null)
+                    return false;
+
+                int entityRemoved = _dataContext.SaveChanges();
+
+                if (entityRemoved <= 0)
+                    return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception($"Erro no banco de dados.");
+            }
         }
     }
 }

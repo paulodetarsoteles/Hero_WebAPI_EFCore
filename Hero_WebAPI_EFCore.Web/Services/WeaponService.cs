@@ -113,7 +113,14 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _weaponRepository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
