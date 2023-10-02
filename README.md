@@ -13,6 +13,6 @@ Obs: Projeto feito com estratégia de modelagem Code-first usando Migrations
 Banco de Dados: MySQL
 
 Relacionamentos: 
-Identidade Secreta/Herói - 1:1
-Herói/Arma - 1:N
-Herói/Filme - N:N
+- Identidade Secreta/Herói - 1:1
+- Herói/Arma - 1:N
+- Herói/Filme - N:N
