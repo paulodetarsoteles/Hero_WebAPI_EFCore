@@ -9,11 +9,13 @@ namespace Hero_WebAPI_EFCore.Web.Services
     public class SecretService : ISecretService
     {
         private readonly ISecretRepository _secretRepository;
+        private readonly IHeroRepository _heroRepository;
         private readonly IMapper _mapper;
 
-        public SecretService(ISecretRepository secretRepository, IMapper mapper)
+        public SecretService(ISecretRepository secretRepository, IHeroRepository heroRepository, IMapper mapper)
         {
             _secretRepository = secretRepository;
+            _heroRepository = heroRepository;
             _mapper = mapper;
         }
 
@@ -36,6 +38,23 @@ namespace Hero_WebAPI_EFCore.Web.Services
                         Name = secret.Name,
                         HeroId = secret.HeroId
                     });
+                }
+
+                foreach (SecretViewModel model in models)
+                {
+                    if (model.HeroId != null)
+                    {
+                        int heroId = (int)model.HeroId;
+                        Hero hero = _heroRepository.GetById(heroId);
+
+                        model.Hero = new()
+                        {
+                            HeroId = hero.HeroId,
+                            Name = hero.Name,
+                            Active = hero.Active,
+                            UpdateDate = hero.UpdateDate
+                        };
+                    }
                 }
 
                 return models;

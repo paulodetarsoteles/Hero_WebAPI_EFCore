@@ -9,11 +9,13 @@ namespace Hero_WebAPI_EFCore.Web.Services
     public class WeaponService : IWeaponService
     {
         private readonly IWeaponRepository _weaponRepository;
+        private readonly IHeroRepository _heroRepository;
         private readonly IMapper _mapper;
 
-        public WeaponService(IWeaponRepository weaponRepository, IMapper mapper)
+        public WeaponService(IWeaponRepository weaponRepository, IHeroRepository heroRepository, IMapper mapper)
         {
             _weaponRepository = weaponRepository;
+            _heroRepository = heroRepository;
             _mapper = mapper;
         }
 
@@ -26,9 +28,19 @@ namespace Hero_WebAPI_EFCore.Web.Services
                 if (entities is null || entities.Count == 0)
                     return null;
 
-                List<WeaponViewModel> models = new();
+                List<WeaponViewModel> models = _mapper.Map<List<WeaponViewModel>>(entities);
 
-                return _mapper.Map<List<WeaponViewModel>>(entities);
+                foreach (WeaponViewModel model in models) 
+                { 
+                    if (model.HeroId != null)
+                    {
+                        int heroId = (int)model.HeroId;
+                        Hero hero = _heroRepository.GetById(heroId);
+                        model.Hero = _mapper.Map<HeroViewModel>(hero);
+                    }
+                }
+
+                return models;
             }
             catch (Exception e)
             {
@@ -44,6 +56,15 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
                 if (entity is null)
                     return null;
+
+                WeaponViewModel model = _mapper.Map<WeaponViewModel>(entity);
+
+                if (model.HeroId != null)
+                {
+                    int heroId = (int)model.HeroId;
+                    Hero hero = _heroRepository.GetById(heroId);
+                    model.Hero = _mapper.Map<HeroViewModel>(hero);
+                }
 
                 return _mapper.Map<WeaponViewModel>(entity);
             }
