@@ -345,7 +345,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_secretService.Insert(secretViewModel))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return StatusCode(StatusCodes.Status200OK, $"Message: Modelo cadastrado.");
+                return StatusCode(StatusCodes.Status200OK, "{\"Message\":\"Modelo cadastrado.\"}");
             }
             catch (Exception e)
             {
