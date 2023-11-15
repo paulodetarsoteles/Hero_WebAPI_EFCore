@@ -101,7 +101,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_heroService.Insert(model))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo cadastrado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_heroService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo atualizado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -141,7 +141,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_heroService.Delete(id))
                     throw new Exception("Erro ao excluir modelo.");
 
-                return Ok("Message: Modelo excluído.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -224,7 +224,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_movieService.Insert(model))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo cadastrado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_movieService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo atualizado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -262,7 +262,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_movieService.Delete(id))
                     throw new Exception("Erro ao excluir modelo.");
 
-                return Ok("Message: Modelo excluído.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -468,7 +468,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo cadastrado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -489,7 +489,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!result)
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo atualizado.");
+                return Ok();
             }
             catch (Exception e)
             {
@@ -508,7 +508,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_weaponService.Delete(id))
                     throw new Exception("Erro ao excluir arma.");
 
-                return Ok("Message: Modelo excluído.");
+                return Ok();
             }
             catch (Exception e)
             {
