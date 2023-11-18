@@ -30,8 +30,8 @@ namespace Hero_WebAPI_EFCore.Web.Services
 
                 List<WeaponViewModel> models = _mapper.Map<List<WeaponViewModel>>(entities);
 
-                foreach (WeaponViewModel model in models) 
-                { 
+                foreach (WeaponViewModel model in models)
+                {
                     if (model.HeroId != null)
                     {
                         int heroId = (int)model.HeroId;
