@@ -364,7 +364,7 @@ namespace Hero_WebAPI_EFCore.Web.Controllers
                 if (!_secretService.Update(model))
                     throw new Exception("Erro ao salvar modelo.");
 
-                return Ok("Message: Modelo atualizado.");
+                return Ok();
             }
             catch (Exception e)
             {
